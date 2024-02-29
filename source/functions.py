@@ -8,10 +8,10 @@ right_wheel_b = 22 # backwards
 def gpio_setup():
     GPIO.setmode(GPIO.BCM)
     GPIO.setwarnings(False)
-    GPIO.setup(left_wheel_a)
-    GPIO.setup(left_wheel_b)
-    GPIO.setup(right_wheel_a)
-    GPIO.setup(right_wheel_b)
+    GPIO.setup(left_wheel_a, GPIO.OUT)
+    GPIO.setup(left_wheel_b, GPIO.OUT)
+    GPIO.setup(right_wheel_a, GPIO.OUT)
+    GPIO.setup(right_wheel_b, GPIO.OUT)
 
 def drive_forward():
     GPIO.output(left_wheel_a, 1)
