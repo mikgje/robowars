@@ -31,3 +31,14 @@ def turn_right():
     GPIO.output(left_wheel_a, 0)
     GPIO.output(right_wheel_b, 0)
     
+def drive_backward():
+    GPIO.output(left_wheel_a, 0)
+    GPIO.output(right_wheel_a, 0)
+    GPIO.output(left_wheel_b, -1)
+    GPIO.output(right_wheel_b, -1)
+
+def stop():
+    GPIO.output(left_wheel_a, 0)
+    GPIO.output(right_wheel_a, 0)
+    GPIO.output(left_wheel_b, 0)
+    GPIO.output(right_wheel_b, 0)
