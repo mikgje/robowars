@@ -113,6 +113,7 @@ def choose_drive_direction():
                 print("Drive reverse")
                 drive_reverse()
 
+gpio_setup()
 
 while True:
     choose_drive_direction()
