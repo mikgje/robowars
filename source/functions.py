@@ -82,34 +82,34 @@ def choose_drive_direction():
         if abs(joystick_axes[1]) < 0.5:
             print("Rotate left")
             rotate_left()
-        elif -0.5 > joystick_axes[1] > -0.9:
+        elif -0.5 > joystick_axes[1] > -0.95:
             print("Turn forward left")
             turn_forward_left()
-        elif 0.5 < joystick_axes[1] < 0.9:
+        elif 0.5 < joystick_axes[1] < 0.95:
             print("Turn reverse left")
             turn_reverse_left()
         else:
-            if joystick_axes[1] < -0.9:
+            if joystick_axes[1] < -0.95:
                 print("Drive forward")
                 drive_forward()
-            elif joystick_axes[1] > 0.9:
+            elif joystick_axes[1] > 0.95:
                 print("Drive reverse")
                 drive_reverse()
     else:
         if abs(joystick_axes[1]) < 0.5:
             print("Rotate right")
             rotate_right()
-        elif -0.5 > joystick_axes[1] > -0.9:
+        elif -0.5 > joystick_axes[1] > -0.95:
             print("Turn forward right")
             turn_forward_right()
-        elif 0.5 < joystick_axes[1] < 0.9:
+        elif 0.5 < joystick_axes[1] < 0.95:
             print("Turn reverse right")
             turn_reverse_right()
         else:
-            if joystick_axes[1] < -0.9:
+            if joystick_axes[1] < -0.95:
                 print("Drive forward")
                 drive_forward()
-            elif joystick_axes[1] > 0.9:
+            elif joystick_axes[1] > 0.95:
                 print("Drive reverse")
                 drive_reverse()
 
