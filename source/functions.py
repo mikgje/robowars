@@ -78,7 +78,6 @@ def choose_drive_direction():
     if abs(get_joystick_axes()[0]) < 0.25 and abs(get_joystick_axes()[1]) < 0.25:
         print("Stop")
         stop()
-    elif abs(get_joystick_axes(0))
     elif get_joystick_axes()[0] < 0:
         if abs(get_joystick_axes()[1]) < 0.5:
             print("Rotate left")
