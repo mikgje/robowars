@@ -69,7 +69,6 @@ def stop():
     GPIO.output(right_wheel_b, 0)
 
 def get_joystick_axes():
-    pygame.joystick.init()
     #returns LEFT STICK: L->R, U->D,  RIGHT_STICK: l->R, U->D
     return [pygame.joystick.Joystick(0).get_axis(0), pygame.joystick.Joystick(0).get_axis(1),
             pygame.joystick.Joystick(0).get_axis(3), pygame.joystick.Joystick(0).get_axis(4)]
@@ -114,6 +113,7 @@ def choose_drive_direction():
                 drive_reverse()
 
 gpio_setup()
+pygame.joystick.init()
 
 while True:
     choose_drive_direction()
