@@ -1,4 +1,5 @@
 import RPi.GPIO as GPIO
+import pygame
 
 left_wheel_a = 23 # forward
 left_wheel_b = 24 # forward
@@ -42,3 +43,12 @@ def stop():
     GPIO.output(right_wheel_a, 0)
     GPIO.output(left_wheel_b, 0)
     GPIO.output(right_wheel_b, 0)
+
+def get_joystick_axes():
+    pygame.joystick.init()
+    #returns LEFT STICK: L->R, U->D,  RIGHT_STICK: l->R, U->D
+    return [pygame.joystick.Joystick(0).get_axis(0), pygame.joystick.Joystick(0).get_axis(1),
+            pygame.joystick.Joystick(0).get_axis(3), pygame.joystick.Joystick(0).get_axis(4)]
+
+while True:
+    print(get_joystick_axes())
