@@ -7,7 +7,7 @@
 #include "../lib/WiringPi/wiringPi/wiringPi.h"
 #include <stdlib.h>
 
-#define CONTROLLER "/dev/js0"
+#define CONTROLLER "/dev/input/js0"
 
 #define LEFT_WHEEL_A 23 // forward
 #define LEFT_WHEEL_B 24 // forward
@@ -86,60 +86,54 @@ void stop() {
     digitalWrite(RIGHT_WHEEL_B, LOW);
 }
 
-/*
-def get_joystick_axes():
-    #returns LEFT STICK: L->R, U->D,  RIGHT_STICK: l->R, U->D
-    return [pygame.joystick.Joystick(0).get_axis(0), pygame.joystick.Joystick(0).get_axis(1),
-            pygame.joystick.Joystick(0).get_axis(3), pygame.joystick.Joystick(0).get_axis(4)]
+//returns LEFT STICK: L->R, U->D,  RIGHT_STICK: L->R, U->D
 
-def choose_drive_direction():
-    joystick_axes = get_joystick_axes()
-    if abs(joystick_axes[0]) < 0.25 and abs(joystick_axes[1]) < 0.25:
-        print("Stop")
-        stop()
-    elif joystick_axes[0] < 0:
-        if abs(joystick_axes[1]) < 0.3:
-            print("Rotate left")
-            rotate_right()
-        elif -0.3 > joystick_axes[1] > -0.98:
-            print("Turn forward left")
-            turn_forward_right()
-        elif 0.3 < joystick_axes[1] < 0.98:
-            print("Turn reverse left")
-            turn_reverse_right()
-        else:
-            if joystick_axes[1] < -0.98:
-                print("Drive forward")
-                drive_forward()
-            elif joystick_axes[1] > 0.98:
-                print("Drive reverse")
-                drive_reverse()
-    else:
-        if abs(joystick_axes[1]) < 0.3:
-            print("Rotate right")
-            rotate_left()
-        elif -0.3 > joystick_axes[1] > -0.98:
-            print("Turn forward right")
-            turn_forward_left()
-        elif 0.3 < joystick_axes[1] < 0.98:
-            print("Turn reverse right")
-            turn_reverse_left()
-        else:
-            if joystick_axes[1] < -0.98:
-                print("Drive forward")
-                drive_forward()
-            elif joystick_axes[1] > 0.98:
-                print("Drive reverse")
-                drive_reverse()
+void choose_drive_direction(int X, int Y, int RX, int RY) {
+    if(abs(X) < 5000 && abs(Y) < 5000) {
+        printf("Stop");
+        stop();
+    }
+    else if(X < 0) {
+        if(abs(Y) < 9830) {
+            printf("Rotate left");
+            rotate_right();
+        } else if(-9830 > Y > -32111) {
+            printf("Turn forward left");
+            turn_forward_right();
+        } else if(9830 < Y < 32111) {
+            printf("Turn reverse left");
+            turn_reverse_right();
+        } else {
+            if(Y < -32111) {
+                printf("Drive forward");
+                drive_forward();
+            } else if(Y > 32111) {
+                printf("Drive reverse");
+                drive_reverse();
+            }
+        }
+    } else {
+        if(abs(Y) < 9830) {
+            printf("Rotate right");
+            rotate_left();
+        } else if(-9830 > Y > -32111) {
+            printf("Turn forward right");
+            turn_forward_left();
+        } else if(9830 < Y < 32111) {
+            printf("Turn reverse right");
+            turn_reverse_left();
+        } else {
+            if(Y < -32111) {
+                printf("Drive forward");
+                drive_forward();
+            } else if(Y > 32111) {}
+                printf("Drive reverse");
+                drive_reverse();
+        }
+    }
+}
 
 wiringPiSetupGpio();
-
-gpio_setup()
-pygame.joystick.init()
-
-while True:
-    choose_drive_direction()
-*/
 
 int main()
 {
@@ -191,7 +185,10 @@ int main()
 			printf("Z: %6d  ", axis[2] );
 			
 		if( num_of_axis > 3 )
-			printf("R: %6d  ", axis[3] );
+			printf("RX: %6d  ", axis[3] );
+
+        if ( num_of_axis > 4)
+            printf("RY: %6d  ", axis[4] );
 			
 		for( x=0 ; x<num_of_buttons ; ++x )
 			printf("B%d: %d  ", x, button[x] );
