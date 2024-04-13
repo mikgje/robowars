@@ -154,9 +154,9 @@ void choose_drive_direction(int X, int Y) {
 void choose_weapon_direction(int RX, int RY) {
     if(abs(RX) < 5000 && abs(RY) < 5000) {
         weapon_stop();
-    } else if(RY > 0) {
-        weapon_forward();
     } else if(RY < 0) {
+        weapon_forward();
+    } else if(RY > 0) {
         weapon_backward();
     }
 }
