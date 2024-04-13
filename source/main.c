@@ -23,6 +23,7 @@ void gpio_setup() {
 }
 
 void drive_forward() {
+    printf("Drive forward");
     digitalWrite(LEFT_WHEEL_A, HIGH);
     digitalWrite(LEFT_WHEEL_B, HIGH);
     digitalWrite(RIGHT_WHEEL_A, HIGH);
@@ -30,6 +31,7 @@ void drive_forward() {
 }
 
 void turn_forward_left() {
+    printf("Turn forward left");
     digitalWrite(LEFT_WHEEL_A, LOW);
     digitalWrite(LEFT_WHEEL_B, LOW);
     digitalWrite(RIGHT_WHEEL_A, HIGH);
@@ -37,6 +39,7 @@ void turn_forward_left() {
 }
     
 void rotate_left() {
+    printf("Rotate left");
     digitalWrite(LEFT_WHEEL_A, LOW);
     digitalWrite(LEFT_WHEEL_B, HIGH);
     digitalWrite(RIGHT_WHEEL_A, HIGH);
@@ -44,6 +47,7 @@ void rotate_left() {
 }
 
 void turn_reverse_left() {
+    printf("Turn reverse left");
     digitalWrite(LEFT_WHEEL_A, LOW);
     digitalWrite(LEFT_WHEEL_B, LOW);
     digitalWrite(RIGHT_WHEEL_A, LOW);
@@ -51,6 +55,7 @@ void turn_reverse_left() {
 }
 
 void turn_forward_right() {
+    printf("Turn forward right");
     digitalWrite(LEFT_WHEEL_A, HIGH);
     digitalWrite(LEFT_WHEEL_B, LOW);
     digitalWrite(RIGHT_WHEEL_A, LOW);
@@ -58,6 +63,7 @@ void turn_forward_right() {
 }
 
 void rotate_right() {
+    printf("Rotate right");
     digitalWrite(LEFT_WHEEL_A, HIGH);
     digitalWrite(LEFT_WHEEL_B, LOW);
     digitalWrite(RIGHT_WHEEL_A, LOW);
@@ -65,7 +71,7 @@ void rotate_right() {
 }
 
 void turn_reverse_right() {
-
+    printf("Turn reverse right");
     digitalWrite(LEFT_WHEEL_A, LOW);
     digitalWrite(LEFT_WHEEL_B, HIGH);
     digitalWrite(RIGHT_WHEEL_A, LOW);
@@ -73,6 +79,7 @@ void turn_reverse_right() {
 }
 
 void drive_reverse() {
+    printf("Drive reverse");
     digitalWrite(LEFT_WHEEL_A, LOW);
     digitalWrite(LEFT_WHEEL_B, HIGH);
     digitalWrite(RIGHT_WHEEL_A, LOW);
@@ -80,6 +87,7 @@ void drive_reverse() {
 }
 
 void stop() {
+    printf("Stop");
     digitalWrite(LEFT_WHEEL_A, LOW);
     digitalWrite(LEFT_WHEEL_B, LOW);
     digitalWrite(RIGHT_WHEEL_A, LOW);
@@ -90,44 +98,33 @@ void stop() {
 
 void choose_drive_direction(int X, int Y, int RX, int RY) {
     if(abs(X) < 5000 && abs(Y) < 5000) {
-        printf("Stop");
         stop();
     }
     else if(X < 0) {
         if(abs(Y) < 9830) {
-            printf("Rotate left");
             rotate_right();
         } else if(-9830 > Y > -32111) {
-            printf("Turn forward left");
             turn_forward_right();
         } else if(9830 < Y < 32111) {
-            printf("Turn reverse left");
             turn_reverse_right();
         } else {
             if(Y < -32111) {
-                printf("Drive forward");
                 drive_forward();
             } else if(Y > 32111) {
-                printf("Drive reverse");
                 drive_reverse();
             }
         }
     } else {
         if(abs(Y) < 9830) {
-            printf("Rotate right");
             rotate_left();
         } else if(-9830 > Y > -32111) {
-            printf("Turn forward right");
             turn_forward_left();
         } else if(9830 < Y < 32111) {
-            printf("Turn reverse right");
             turn_reverse_left();
         } else {
             if(Y < -32111) {
-                printf("Drive forward");
                 drive_forward();
             } else if(Y > 32111) {}
-                printf("Drive reverse");
                 drive_reverse();
         }
     }
@@ -178,7 +175,10 @@ int main()
 				break;
 		}
 
-			/* print the results */
+        choose_drive_direction(axis[0], axis[1], axis[3], axis[4]);
+
+        /*
+			// print the results
 		printf( "X: %6d  Y: %6d  ", axis[0], axis[1] );
 		
 		if( num_of_axis > 2 )
@@ -194,6 +194,7 @@ int main()
 			printf("B%d: %d  ", x, button[x] );
 
 		printf("  \r");
+        */
 		fflush(stdout);
 	}
 
