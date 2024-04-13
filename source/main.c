@@ -22,6 +22,8 @@ void gpio_setup() {
     pinMode(LEFT_WHEEL_B, OUTPUT);
     pinMode(RIGHT_WHEEL_A, OUTPUT);
     pinMode(RIGHT_WHEEL_B, OUTPUT);
+    pinMode(WEAPON_A, OUTPUT);
+    pinMode(WEAPON_B, OUTPUT);
 }
 
 void drive_forward() {
