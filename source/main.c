@@ -11,8 +11,10 @@
 
 #define LEFT_WHEEL_A 23 // forward
 #define LEFT_WHEEL_B 24 // forward
-#define RIGHT_WHEEL_A 27 // backwards
-#define RIGHT_WHEEL_B 22 // backwards
+#define RIGHT_WHEEL_A 27 // backward
+#define RIGHT_WHEEL_B 22 // backward
+#define WEAPON_A 5 // forward
+#define WEAPON_B 6 // backward
 
 
 void gpio_setup() {
@@ -94,9 +96,27 @@ void stop() {
     digitalWrite(RIGHT_WHEEL_B, LOW);
 }
 
+void weapon_forward() {
+    printf("Weapon foward\n");
+    digitalWrite(WEAPON_A, HIGH);
+    digitalWrite(WEAPON_B, LOW);
+}
+
+void weapon_backward() {
+    printf("Weapon backward\n");
+    digitalWrite(WEAPON_A, LOW);
+    digitalWrite(WEAPON_B, HIGH);
+}
+
+void weapon_stop() {
+    printf("Weapon stop\n");
+    digitalWrite(WEAPON_A, LOW);
+    digitalWrite(WEAPON_B, LOW);
+}
+
 //returns LEFT STICK: L->R, U->D,  RIGHT_STICK: L->R, U->D
 
-void choose_drive_direction(int X, int Y, int RX, int RY) {
+void choose_drive_direction(int X, int Y) {
     if(abs(X) < 5000 && abs(Y) < 5000) {
         stop();
     }
@@ -108,7 +128,6 @@ void choose_drive_direction(int X, int Y, int RX, int RY) {
         } else if(9830 < Y && Y < 32111) {
             turn_reverse_right();
         } else {
-            printf("%i", Y);
             if(Y < -32111) {
                 drive_forward();
             } else if(Y > 32111) {
@@ -123,13 +142,22 @@ void choose_drive_direction(int X, int Y, int RX, int RY) {
         } else if(9830 < Y && Y < 32111) {
             turn_reverse_left();
         } else {
-            printf("%i", Y);
             if(Y < -32111) {
                 drive_forward();
             } else if(Y > 32111) {
                 drive_reverse();
             }
         }
+    }
+}
+
+void choose_weapon_direction(int RX, int RY) {
+    if(abs(RX) < 5000 && abs(RY) < 5000) {
+        weapon_stop();
+    } else if(RY > 0) {
+        weapon_forward();
+    } else if(RY < 0) {
+        weapon_backward();
     }
 }
 
@@ -179,7 +207,8 @@ int main() {
 				break;
 		}
 
-        choose_drive_direction(axis[0], axis[1], axis[3], axis[4]);
+        choose_drive_direction(axis[0], axis[1]);
+        choose_weapon_direction(axis[3], axis[4]);
 
         /*
 			// print the results
