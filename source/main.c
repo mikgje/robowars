@@ -108,7 +108,7 @@ void choose_drive_direction(int X, int Y, int RX, int RY) {
         } else if(9830 < Y && Y < 32111) {
             turn_reverse_right();
         } else {
-            printf(Y);
+            printf("%i", Y);
             if(Y < -32111) {
                 drive_forward();
             } else if(Y > 32111) {
