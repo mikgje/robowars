@@ -9,12 +9,12 @@
 
 #define CONTROLLER "/dev/input/js0"
 
-#define LEFT_WHEEL_A 23 // forward
-#define LEFT_WHEEL_B 24 // forward
-#define RIGHT_WHEEL_A 27 // backward
-#define RIGHT_WHEEL_B 22 // backward
-#define WEAPON_A 5 // forward
-#define WEAPON_B 6 // backward
+#define LEFT_WHEEL_A 24 // forward
+#define LEFT_WHEEL_B 23 // forward
+#define RIGHT_WHEEL_A 22 // backward
+#define RIGHT_WHEEL_B 27 // backward
+#define WEAPON_A 6 // forward
+#define WEAPON_B 5 // backward
 
 
 void gpio_setup() {
