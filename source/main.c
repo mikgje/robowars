@@ -23,7 +23,7 @@ void gpio_setup() {
 }
 
 void drive_forward() {
-    printf("Drive forward");
+    printf("Drive forward\n");
     digitalWrite(LEFT_WHEEL_A, HIGH);
     digitalWrite(LEFT_WHEEL_B, HIGH);
     digitalWrite(RIGHT_WHEEL_A, HIGH);
@@ -31,7 +31,7 @@ void drive_forward() {
 }
 
 void turn_forward_left() {
-    printf("Turn forward left");
+    printf("Turn forward left\n");
     digitalWrite(LEFT_WHEEL_A, LOW);
     digitalWrite(LEFT_WHEEL_B, LOW);
     digitalWrite(RIGHT_WHEEL_A, HIGH);
@@ -39,7 +39,7 @@ void turn_forward_left() {
 }
     
 void rotate_left() {
-    printf("Rotate left");
+    printf("Rotate left\n");
     digitalWrite(LEFT_WHEEL_A, LOW);
     digitalWrite(LEFT_WHEEL_B, HIGH);
     digitalWrite(RIGHT_WHEEL_A, HIGH);
@@ -47,7 +47,7 @@ void rotate_left() {
 }
 
 void turn_reverse_left() {
-    printf("Turn reverse left");
+    printf("Turn reverse left\n");
     digitalWrite(LEFT_WHEEL_A, LOW);
     digitalWrite(LEFT_WHEEL_B, LOW);
     digitalWrite(RIGHT_WHEEL_A, LOW);
@@ -55,7 +55,7 @@ void turn_reverse_left() {
 }
 
 void turn_forward_right() {
-    printf("Turn forward right");
+    printf("Turn forward right\n");
     digitalWrite(LEFT_WHEEL_A, HIGH);
     digitalWrite(LEFT_WHEEL_B, LOW);
     digitalWrite(RIGHT_WHEEL_A, LOW);
@@ -63,7 +63,7 @@ void turn_forward_right() {
 }
 
 void rotate_right() {
-    printf("Rotate right");
+    printf("Rotate right\n");
     digitalWrite(LEFT_WHEEL_A, HIGH);
     digitalWrite(LEFT_WHEEL_B, LOW);
     digitalWrite(RIGHT_WHEEL_A, LOW);
@@ -71,7 +71,7 @@ void rotate_right() {
 }
 
 void turn_reverse_right() {
-    printf("Turn reverse right");
+    printf("Turn reverse right\n");
     digitalWrite(LEFT_WHEEL_A, LOW);
     digitalWrite(LEFT_WHEEL_B, HIGH);
     digitalWrite(RIGHT_WHEEL_A, LOW);
@@ -79,7 +79,7 @@ void turn_reverse_right() {
 }
 
 void drive_reverse() {
-    printf("Drive reverse");
+    printf("Drive reverse\n");
     digitalWrite(LEFT_WHEEL_A, LOW);
     digitalWrite(LEFT_WHEEL_B, HIGH);
     digitalWrite(RIGHT_WHEEL_A, LOW);
@@ -87,7 +87,7 @@ void drive_reverse() {
 }
 
 void stop() {
-    printf("Stop");
+    printf("Stop\n");
     digitalWrite(LEFT_WHEEL_A, LOW);
     digitalWrite(LEFT_WHEEL_B, LOW);
     digitalWrite(RIGHT_WHEEL_A, LOW);
@@ -103,9 +103,9 @@ void choose_drive_direction(int X, int Y, int RX, int RY) {
     else if(X < 0) {
         if(abs(Y) < 9830) {
             rotate_right();
-        } else if(-9830 > Y > -32111) {
+        } else if(-9830 > Y && Y > -32111) {
             turn_forward_right();
-        } else if(9830 < Y < 32111) {
+        } else if(9830 < Y && Y < 32111) {
             turn_reverse_right();
         } else {
             if(Y < -32111) {
@@ -117,9 +117,9 @@ void choose_drive_direction(int X, int Y, int RX, int RY) {
     } else {
         if(abs(Y) < 9830) {
             rotate_left();
-        } else if(-9830 > Y > -32111) {
+        } else if(-9830 > Y && Y > -32111) {
             turn_forward_left();
-        } else if(9830 < Y < 32111) {
+        } else if(9830 < Y && Y < 32111) {
             turn_reverse_left();
         } else {
             if(Y < -32111) {
@@ -131,11 +131,10 @@ void choose_drive_direction(int X, int Y, int RX, int RY) {
 }
 
 
-int main()
-{
+int main() {
     wiringPiSetupGpio();
     gpio_setup();
-    
+
 	int joy_fd, *axis=NULL, num_of_axis=0, num_of_buttons=0, x;
 	char *button=NULL, name_of_joystick[80];
 	struct js_event js;
