@@ -11,10 +11,10 @@
 
 #define LEFT_WHEEL_A 23 // forward
 #define LEFT_WHEEL_B 24 // forward
-#define RIGHT_WHEEL_A 22 // backward
-#define RIGHT_WHEEL_B 27 // backward
-#define WEAPON_A 6 // forward
-#define WEAPON_B 5 // backward
+#define RIGHT_WHEEL_A 27 // backward
+#define RIGHT_WHEEL_B 22 // backward
+#define WEAPON_A 5 // forward
+#define WEAPON_B 6 // backward
 
 
 void gpio_setup() {
@@ -124,11 +124,11 @@ void choose_drive_direction(int X, int Y) {
     }
     else if(X < 0) {
         if(abs(Y) < 9830) {
-            rotate_left();
+            rotate_right();
         } else if(-9830 > Y && Y > -32111) {
-            turn_forward_left();
+            turn_forward_right();
         } else if(9830 < Y && Y < 32111) {
-            turn_reverse_left();
+            turn_reverse_right();
         } else {
             if(Y < -32111) {
                 drive_forward();
@@ -138,11 +138,11 @@ void choose_drive_direction(int X, int Y) {
         }
     } else {
         if(abs(Y) < 9830) {
-            rotate_right();
+            rotate_left();
         } else if(-9830 > Y && Y > -32111) {
-            turn_forward_right();
+            turn_forward_left();
         } else if(9830 < Y && Y < 32111) {
-            turn_reverse_right();
+            turn_reverse_left();
         } else {
             if(Y < -32111) {
                 drive_forward();
