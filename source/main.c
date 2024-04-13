@@ -130,10 +130,12 @@ void choose_drive_direction(int X, int Y, int RX, int RY) {
     }
 }
 
-wiringPiSetupGpio();
 
 int main()
 {
+    wiringPiSetupGpio();
+    gpio_setup();
+    
 	int joy_fd, *axis=NULL, num_of_axis=0, num_of_buttons=0, x;
 	char *button=NULL, name_of_joystick[80];
 	struct js_event js;
