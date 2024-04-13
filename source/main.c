@@ -126,8 +126,9 @@ void choose_drive_direction(int X, int Y, int RX, int RY) {
             printf("%i", Y);
             if(Y < -32111) {
                 drive_forward();
-            } else if(Y > 32111) {}
+            } else if(Y > 32111) {
                 drive_reverse();
+            }
         }
     }
 }
